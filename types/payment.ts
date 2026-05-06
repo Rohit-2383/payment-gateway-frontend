@@ -1,19 +1,19 @@
+import {
+  PAYMENT_STATUS,
+  CARD_TYPES,
+  CURRENCIES,
+} from "@/utils/constants";
+
 export type PaymentStatus =
-  | "idle"
-  | "processing"
-  | "success"
-  | "failed"
-  | "timeout";
+  (typeof PAYMENT_STATUS)[keyof typeof PAYMENT_STATUS];
 
 export type CardType =
-  | "visa"
-  | "mastercard"
-  | "amex"
-  | "unknown";
+  (typeof CARD_TYPES)[keyof typeof CARD_TYPES];
 
-export type Currency = "INR" | "USD";
+export type Currency =
+  (typeof CURRENCIES)[keyof typeof CURRENCIES];
 
-export interface PaymentPayload {
+  export interface PaymentPayload {
   transactionId: string;
   cardholderName: string;
   cardNumber: string;
