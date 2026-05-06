@@ -5,6 +5,7 @@ import {
   PaymentStatus,
   Transaction,
 } from "@/types/payment";
+import { PAYMENT_STATUS } from "@/utils/constants";
 
 interface PaymentStore {
   status: PaymentStatus;
@@ -33,7 +34,7 @@ interface PaymentStore {
 }
 
 const initialState = {
-  status: "idle" as PaymentStatus,
+  status: PAYMENT_STATUS.IDLE,
   currentTransaction: null,
   selectedTransaction: null,
 };
