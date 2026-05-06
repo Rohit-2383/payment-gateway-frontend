@@ -3,7 +3,7 @@
 import { memo, useCallback } from "react";
 
 import { usePaymentStore } from "@/store/paymentStore";
-import { Transaction } from "@/types/payment";
+import type { Transaction } from "@/types/payment";
 import { CURRENCY_SYMBOLS } from "@/constants/currencies";
 import { TRANSACTION_STATUS_CLASSES } from "@/constants/payment";
 import {
@@ -24,14 +24,12 @@ const TransactionRow = memo(function TransactionRow({
     onClick(transaction);
   }, [onClick, transaction]);
 
+  const truncatedId = truncateTransactionId(transaction.transactionId);
+
   return (
-    <button
-      className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0"
-      onClick={handleClick}
-      aria-label={`View transaction ${transaction.transactionId}`}
-    >
+    <div className="w-full flex items-center justify-between px-4 py-3 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors">
       <span className="font-mono text-sm text-gray-700 shrink-0">
-        {truncateTransactionId(transaction.transactionId)}
+        {truncatedId}
       </span>
 
       <span className="text-sm font-medium text-gray-900 mx-4 shrink-0">
@@ -48,7 +46,15 @@ const TransactionRow = memo(function TransactionRow({
       <span className="text-xs text-gray-500 ml-4 shrink-0">
         {formatTransactionTimestamp(transaction.timestamp)}
       </span>
-    </button>
+
+      <button
+        className="text-xs text-muted-foreground hover:text-foreground underline-offset-2 hover:underline ml-4 shrink-0"
+        onClick={handleClick}
+        aria-label={`View transaction details for ${truncatedId}`}
+      >
+        View →
+      </button>
+    </div>
   );
 });
 

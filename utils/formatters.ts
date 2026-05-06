@@ -61,6 +61,17 @@ export function formatTransactionTimestamp(iso: string): string {
   return `${day} ${month} ${year}, ${hours}:${minutes}`;
 }
 
+export function formatTransactionTimestampFull(iso: string): string {
+  const date = new Date(iso);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = date.toLocaleString("en-GB", { month: "short" });
+  const year = date.getFullYear();
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const seconds = String(date.getSeconds()).padStart(2, "0");
+  return `${day} ${month} ${year}, ${hours}:${minutes}:${seconds}`;
+}
+
 const EXPIRY_MAX_DIGITS = 4; // MMYY
 const EXPIRY_SLASH_INDEX = 2;
 
