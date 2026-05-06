@@ -25,35 +25,59 @@ const TransactionRow = memo(function TransactionRow({
   }, [onClick, transaction]);
 
   const truncatedId = truncateTransactionId(transaction.transactionId);
+  const badgeClass = TRANSACTION_STATUS_CLASSES[transaction.status];
+  const amountDisplay = `${CURRENCY_SYMBOLS[transaction.currency]}${transaction.amount.toFixed(2)}`;
+  const timestampDisplay = formatTransactionTimestamp(transaction.timestamp);
 
   return (
-    <div className="w-full flex items-center justify-between px-4 py-3 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors">
-      <span className="font-mono text-sm text-gray-700 shrink-0">
-        {truncatedId}
-      </span>
+    <div className="overflow-hidden border-b border-gray-100 last:border-b-0 hover:bg-muted/30 transition-colors">
+      {/* Mobile layout — hidden at sm+ */}
+      <div className="sm:hidden px-4 py-3">
+        <div className="flex items-center justify-between gap-2">
+          <span className="font-mono text-sm min-w-[90px]">{truncatedId}</span>
+          <span className={`text-xs font-medium px-2 py-0.5 rounded-full capitalize shrink-0 ${badgeClass}`}>
+            {transaction.status}
+          </span>
+        </div>
+        <div className="flex items-center justify-between gap-2 mt-1.5">
+          <span className="text-sm font-medium shrink-0 min-w-[80px]">
+            {amountDisplay}
+          </span>
+          <span className="text-xs text-muted-foreground min-w-0 truncate mx-2">
+            {timestampDisplay}
+          </span>
+          <button
+            className="text-xs text-muted-foreground hover:text-foreground underline-offset-2 hover:underline shrink-0"
+            onClick={handleClick}
+            aria-label={`View transaction details for ${truncatedId}`}
+          >
+            View →
+          </button>
+        </div>
+      </div>
 
-      <span className="text-sm font-medium text-gray-900 mx-4 shrink-0">
-        {CURRENCY_SYMBOLS[transaction.currency]}
-        {transaction.amount.toFixed(2)}
-      </span>
-
-      <span
-        className={`text-xs font-medium px-2 py-0.5 rounded-full capitalize shrink-0 ${TRANSACTION_STATUS_CLASSES[transaction.status]}`}
-      >
-        {transaction.status}
-      </span>
-
-      <span className="text-xs text-gray-500 ml-4 shrink-0">
-        {formatTransactionTimestamp(transaction.timestamp)}
-      </span>
-
-      <button
-        className="text-xs text-muted-foreground hover:text-foreground underline-offset-2 hover:underline ml-4 shrink-0"
-        onClick={handleClick}
-        aria-label={`View transaction details for ${truncatedId}`}
-      >
-        View →
-      </button>
+      {/* Desktop layout — hidden below sm */}
+      <div className="hidden sm:grid sm:grid-cols-[auto_1fr_auto_auto_auto] items-center gap-3 px-4 py-3">
+        <span className="font-mono text-sm truncate min-w-[90px]">
+          {truncatedId}
+        </span>
+        <span className="text-sm font-medium text-left min-w-[80px]">
+          {amountDisplay}
+        </span>
+        <span className={`text-xs font-medium px-2 py-0.5 rounded-full capitalize shrink-0 ${badgeClass}`}>
+          {transaction.status}
+        </span>
+        <span className="text-xs text-muted-foreground">
+          {timestampDisplay}
+        </span>
+        <button
+          className="text-xs text-muted-foreground hover:text-foreground underline-offset-2 hover:underline"
+          onClick={handleClick}
+          aria-label={`View transaction details for ${truncatedId}`}
+        >
+          View →
+        </button>
+      </div>
     </div>
   );
 });
@@ -83,7 +107,7 @@ const TransactionHistory = memo(function TransactionHistory() {
   }
 
   return (
-    <div className="divide-y divide-gray-100 rounded-lg border border-gray-200 overflow-hidden">
+    <div className="overflow-hidden rounded-lg border border-gray-200">
       {transactions.map((transaction) => (
         <TransactionRow
           key={transaction.transactionId}

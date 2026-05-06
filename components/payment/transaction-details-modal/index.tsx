@@ -26,7 +26,7 @@ export function TransactionDetailsModal() {
 
   return (
     <Dialog open={selectedTransaction !== null} onOpenChange={handleOpenChange}>
-      <DialogContent showCloseButton={false} className="sm:max-w-md">
+      <DialogContent showCloseButton={false} className="sm:max-w-md max-h-[90vh] overflow-y-auto">
         {selectedTransaction && (
           <TransactionDetailsModalContent
             transaction={selectedTransaction}

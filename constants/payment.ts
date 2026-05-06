@@ -15,3 +15,17 @@ export const REASON_VISIBLE_STATUSES: ReadonlySet<PaymentStatus> = new Set([
   PAYMENT_STATUS.FAILED,
   PAYMENT_STATUS.TIMEOUT,
 ]);
+
+export const TERMINAL_STATUSES: ReadonlySet<PaymentStatus> = new Set([
+  PAYMENT_STATUS.SUCCESS,
+  PAYMENT_STATUS.FAILED,
+  PAYMENT_STATUS.TIMEOUT,
+]);
+
+export const STATUS_LABELS: Record<PaymentStatus, string> = {
+  idle: "Idle",
+  processing: "Processing",
+  success: "Success",
+  failed: "Failed",
+  timeout: "Timeout",
+};
