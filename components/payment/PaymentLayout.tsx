@@ -7,11 +7,22 @@ import { PaymentActions } from "@/components/payment/PaymentActions";
 import { PaymentForm } from "@/components/payment/PaymentForm";
 import { PaymentStatus } from "@/components/payment/PaymentStatus";
 import { PaymentSummary } from "@/components/payment/PaymentSummary";
+import TransactionHistory from "@/components/payment/TransactionHistory";
+import { TransactionDetailsModal } from "@/components/payment/TransactionDetailsModal";
 import { Card } from "@/components/ui/card";
 import { usePayment } from "@/hooks/usePayment";
 import { usePaymentForm } from "@/hooks/usePaymentForm";
 import type { PaymentPayload } from "@/types/payment";
-import { PAYMENT_STATUS } from "@/utils/constants";
+import { PAYMENT_STATUS } from "@/constants/payment";
+
+const TransactionHistorySection = React.memo(function TransactionHistorySection() {
+  return (
+    <section className="flex flex-col gap-4">
+      <h2 className="text-lg font-semibold tracking-tight">Transaction History</h2>
+      <TransactionHistory />
+    </section>
+  );
+});
 
 const UI_TEXT = {
   title: "Payment Gateway",
@@ -83,7 +94,11 @@ export function PaymentLayout() {
             <PaymentSummary />
           </div>
         </div>
+
+        <TransactionHistorySection />
       </main>
+
+      <TransactionDetailsModal />
     </div>
   );
 }
