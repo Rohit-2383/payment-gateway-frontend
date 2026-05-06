@@ -43,6 +43,24 @@ export function formatCardNumber(value: string): string {
   return chunkString(digits, CARD_NUMBER_GROUP_SIZE_DEFAULT).join(" ").trim();
 }
 
+const TRANSACTION_ID_DISPLAY_LENGTH = 8;
+
+export function truncateTransactionId(id: string): string {
+  return id.length > TRANSACTION_ID_DISPLAY_LENGTH
+    ? `${id.slice(0, TRANSACTION_ID_DISPLAY_LENGTH)}…`
+    : id;
+}
+
+export function formatTransactionTimestamp(iso: string): string {
+  const date = new Date(iso);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = date.toLocaleString("en-GB", { month: "short" });
+  const year = date.getFullYear();
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  return `${day} ${month} ${year}, ${hours}:${minutes}`;
+}
+
 const EXPIRY_MAX_DIGITS = 4; // MMYY
 const EXPIRY_SLASH_INDEX = 2;
 
