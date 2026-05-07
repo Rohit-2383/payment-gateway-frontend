@@ -11,7 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import type { PaymentFormInputValues, PaymentFormValues } from "@/utils/validators";
-import { CURRENCIES } from "@/utils/constants";
+import { CURRENCIES } from "@/constants/currencies";
 
 const UI_TEXT = {
   label: "Currency",

@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { MAX_RETRY_ATTEMPTS } from "@/utils/constants";
+import { MAX_RETRY_ATTEMPTS } from "@/constants/payment";
 
 export function PaymentSummary() {
   return (

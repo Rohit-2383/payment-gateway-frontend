@@ -1,4 +1,4 @@
-import { FAILURE_REASONS, PAYMENT_STATUS } from "@/utils/constants";
+import { FAILURE_REASONS, PAYMENT_STATUS } from "@/constants/payment";
 import { NextResponse } from "next/server";
 
 const delay = (ms: number) =>

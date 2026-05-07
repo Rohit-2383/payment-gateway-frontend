@@ -1,8 +1,6 @@
-import {
-  PAYMENT_STATUS,
-  CARD_TYPES,
-  CURRENCIES,
-} from "@/utils/constants";
+import { PAYMENT_STATUS } from "@/constants/payment";
+import { CARD_TYPES } from "@/constants/cards";
+import { CURRENCIES } from "@/constants/currencies";
 
 export type PaymentStatus =
   (typeof PAYMENT_STATUS)[keyof typeof PAYMENT_STATUS];

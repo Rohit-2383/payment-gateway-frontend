@@ -1,6 +1,7 @@
 import { z } from "zod";
 
-import { CARD_TYPES, CURRENCIES } from "@/utils/constants";
+import { CARD_TYPES } from "@/constants/cards";
+import { CURRENCIES } from "@/constants/currencies";
 import { sanitizeCardNumber } from "@/utils/formatters";
 import type { CardType, Currency } from "@/types/payment";
 

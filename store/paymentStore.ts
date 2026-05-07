@@ -5,7 +5,7 @@ import {
   PaymentStatus,
   Transaction,
 } from "@/types/payment";
-import { PAYMENT_STATUS } from "@/utils/constants";
+import { PAYMENT_STATUS } from "@/constants/payment";
 
 interface PaymentStore {
   status: PaymentStatus;

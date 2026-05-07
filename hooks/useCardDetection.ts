@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 
-import { CARD_TYPES } from "@/utils/constants";
+import { CARD_TYPES } from "@/constants/cards";
 import { sanitizeCardNumber } from "@/utils/formatters";
 import type { CardType } from "@/types/payment";
 

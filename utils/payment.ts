@@ -1,7 +1,7 @@
 import {
   PAYMENT_TIMEOUT_MS,
   PAYMENT_STATUS,
-} from "@/utils/constants";
+} from "@/constants/payment";
 
 import {
   PaymentPayload,

@@ -7,7 +7,7 @@ import { usePaymentStore } from "@/store/paymentStore";
 import {
   MAX_RETRY_ATTEMPTS,
   PAYMENT_STATUS,
-} from "@/utils/constants";
+} from "@/constants/payment";
 import { processPayment } from "@/utils/payment";
 
 function nowIsoString(): string {

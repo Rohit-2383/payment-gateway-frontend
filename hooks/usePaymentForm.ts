@@ -5,7 +5,7 @@ import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useCardDetection } from "@/hooks/useCardDetection";
-import { CURRENCIES } from "@/utils/constants";
+import { CURRENCIES } from "@/constants/currencies";
 import {
   paymentFormSchema,
   type PaymentFormInputValues,
