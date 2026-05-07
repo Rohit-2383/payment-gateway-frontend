@@ -10,8 +10,7 @@ import { useCardPreviewContext } from "./CardPreviewContext";
 function EmvChip() {
   return (
     <svg
-      width="38"
-      height="28"
+      className="w-7 h-5 sm:w-10 sm:h-7"
       viewBox="0 0 38 28"
       fill="none"
       aria-hidden="true"
@@ -40,7 +39,7 @@ const BrandLogo = React.memo(function BrandLogo({ cardType }: { cardType: CardTy
   }
 
   return (
-    <span className="rounded border border-zinc-400/30 bg-white/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-300">
+    <span className="rounded border border-zinc-400/30 bg-white/10 px-1.5 py-0.5 text-[0.6rem] font-semibold uppercase tracking-wider text-zinc-300 sm:px-2 sm:text-xs">
       {CARD_TYPE_LABELS[cardType]}
     </span>
   );
@@ -50,9 +49,9 @@ export const CardPreviewBadge = React.memo(function CardPreviewBadge() {
   const { cardType } = useCardPreviewContext();
 
   return (
-    <div className="flex flex-col gap-3.5">
-      <div className="flex items-center justify-between gap-3">
-        <p className="text-[0.7rem] font-medium tracking-widest text-zinc-400 uppercase">
+    <div className="flex flex-col gap-2 sm:gap-3.5">
+      <div className="flex items-center justify-between gap-2 sm:gap-3">
+        <p className="text-[0.6rem] font-medium tracking-widest text-zinc-400 uppercase sm:text-xs">
           Payment Card
         </p>
         <BrandLogo cardType={cardType} />

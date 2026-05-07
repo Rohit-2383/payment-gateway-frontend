@@ -12,9 +12,9 @@ export const CardPreviewName = React.memo(function CardPreviewName() {
     trimmed.length > 0 ? trimmed.toUpperCase() : CARD_PREVIEW_PLACEHOLDERS.cardholderName;
 
   return (
-    <div className="flex min-w-0 flex-col gap-1">
-      <p className="text-[0.7rem] font-medium tracking-widest text-zinc-400">CARDHOLDER</p>
-      <p className="truncate text-sm font-medium tracking-wide sm:text-base">{displayName}</p>
+    <div className="flex min-w-0 shrink flex-col gap-0.5 sm:gap-1">
+      <p className="text-[0.55rem] font-medium tracking-widest text-zinc-400 sm:text-[0.7rem]">CARDHOLDER</p>
+      <p className="truncate text-xs font-medium tracking-wide sm:text-sm md:text-base">{displayName}</p>
     </div>
   );
 });
