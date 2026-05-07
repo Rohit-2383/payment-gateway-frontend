@@ -105,7 +105,7 @@ export function PaymentLayout() {
             >
               <CardPreview.Badge />
               <CardPreview.Number />
-              <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between md:gap-4">
+              <div className="flex flex-col gap-2 sm:gap-3 md:flex-row md:items-end md:justify-between md:gap-4">
                 <CardPreview.Name />
                 <CardPreview.Expiry />
               </div>
