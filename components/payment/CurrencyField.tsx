@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { PaymentFormInputValues, PaymentFormValues } from "@/utils/validators";
+import type { PaymentFormInputValues, PaymentFormValues } from "@/validators/schema";
 import { CURRENCIES } from "@/constants/currencies";
 
 const UI_TEXT = {

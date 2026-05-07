@@ -15,7 +15,7 @@ import type { PaymentPayload } from "@/types/payment";
 import {
   type PaymentFormInputValues,
   type PaymentFormValues,
-} from "@/utils/validators";
+} from "@/validators/schema";
 
 export type PaymentFormProps = {
   title: string;

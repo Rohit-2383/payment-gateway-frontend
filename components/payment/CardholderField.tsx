@@ -4,7 +4,7 @@ import * as React from "react";
 import { Controller, type Control } from "react-hook-form";
 
 import { Input } from "@/components/ui/input";
-import type { PaymentFormInputValues, PaymentFormValues } from "@/utils/validators";
+import type { PaymentFormInputValues, PaymentFormValues } from "@/validators/schema";
 
 const UI_TEXT = {
   label: "Cardholder Name",

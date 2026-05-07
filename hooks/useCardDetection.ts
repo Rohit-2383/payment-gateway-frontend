@@ -2,19 +2,10 @@
 
 import { useMemo } from "react";
 
-import { CARD_TYPES } from "@/constants/cards";
+import { CVV_LENGTHS } from "@/constants/cards";
 import { sanitizeCardNumber } from "@/utils/formatters";
+import { getCardTypeFromCardNumber } from "@/validators/card";
 import type { CardType } from "@/types/payment";
-
-const CVV_LENGTH_DEFAULT = 3;
-const CVV_LENGTH_AMEX = 4;
-
-function detectCardTypeFromDigits(digits: string): CardType {
-  if (digits.startsWith("4")) return CARD_TYPES.VISA;
-  if (digits.startsWith("5")) return CARD_TYPES.MASTERCARD;
-  if (digits.startsWith("34") || digits.startsWith("37")) return CARD_TYPES.AMEX;
-  return CARD_TYPES.UNKNOWN;
-}
 
 export function useCardDetection(cardNumber: string): {
   cardType: CardType;
@@ -22,9 +13,8 @@ export function useCardDetection(cardNumber: string): {
 } {
   return useMemo(() => {
     const digits = sanitizeCardNumber(cardNumber);
-    const cardType = detectCardTypeFromDigits(digits);
-    const maxCVVLength =
-      cardType === CARD_TYPES.AMEX ? CVV_LENGTH_AMEX : CVV_LENGTH_DEFAULT;
+    const cardType = getCardTypeFromCardNumber(digits);
+    const maxCVVLength = CVV_LENGTHS[cardType];
 
     return { cardType, maxCVVLength };
   }, [cardNumber]);

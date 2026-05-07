@@ -10,7 +10,7 @@ import {
   paymentFormSchema,
   type PaymentFormInputValues,
   type PaymentFormValues,
-} from "@/utils/validators";
+} from "@/validators/schema";
 
 export type UsePaymentFormResult = {
   form: ReturnType<typeof useForm<PaymentFormInputValues, unknown, PaymentFormValues>>;
