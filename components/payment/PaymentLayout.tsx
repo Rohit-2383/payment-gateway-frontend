@@ -8,7 +8,7 @@ import { PaymentForm } from "@/components/payment/PaymentForm";
 import { PaymentStatus } from "@/components/payment/PaymentStatus";
 import { PaymentSummary } from "@/components/payment/PaymentSummary";
 import TransactionHistory from "@/components/payment/TransactionHistory";
-import { TransactionDetailsModal } from "@/components/payment/TransactionDetailsModal";
+import { TransactionDetailsModal } from "@/components/payment/transaction-details-modal";
 import { Card } from "@/components/ui/card";
 import { usePayment } from "@/hooks/usePayment";
 import { usePaymentForm } from "@/hooks/usePaymentForm";
@@ -105,7 +105,9 @@ export function PaymentLayout() {
         <TransactionHistorySection />
       </main>
 
-      <TransactionDetailsModal />
+      <TransactionDetailsModal>
+        <TransactionDetailsModal.Content />
+      </TransactionDetailsModal>
     </div>
   );
 }

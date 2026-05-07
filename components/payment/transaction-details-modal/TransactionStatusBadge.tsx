@@ -1,12 +1,15 @@
-import { TRANSACTION_STATUS_CLASSES } from "@/constants/payment";
+"use client";
+
+import * as React from "react";
+
 import { cn } from "@/lib/utils";
-import type { PaymentStatus } from "@/types/payment";
+import { TRANSACTION_STATUS_CLASSES } from "@/constants/payment";
+import { useTransactionModalContext } from "./TransactionModalContext";
 
-interface TransactionStatusBadgeProps {
-  status: PaymentStatus;
-}
+export const TransactionStatusBadge = React.memo(function TransactionStatusBadge() {
+  const { transaction } = useTransactionModalContext();
+  const { status } = transaction;
 
-export function TransactionStatusBadge({ status }: TransactionStatusBadgeProps) {
   return (
     <span
       className={cn(
@@ -17,4 +20,4 @@ export function TransactionStatusBadge({ status }: TransactionStatusBadgeProps) 
       {status}
     </span>
   );
-}
+});
