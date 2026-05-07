@@ -3,6 +3,8 @@
 import * as React from "react";
 import { Controller, type Control } from "react-hook-form";
 
+import { AlertCircle } from "lucide-react";
+
 import { Input } from "@/components/ui/input";
 import type { PaymentFormInputValues, PaymentFormValues } from "@/validators/schema";
 
@@ -64,7 +66,8 @@ export function CardholderField({
               />
             </div>
             {errorMessage ? (
-              <p id={errorId} className="mt-1.5 text-xs text-destructive">
+              <p id={errorId} className="mt-1.5 flex items-center gap-1 text-xs text-destructive">
+                <AlertCircle className="h-3 w-3 shrink-0" aria-hidden="true" />
                 {errorMessage}
               </p>
             ) : null}

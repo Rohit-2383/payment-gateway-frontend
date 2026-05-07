@@ -86,6 +86,15 @@ function pad2(value: number): string {
   return String(value).padStart(2, "0");
 }
 
+export function formatAmountParts(amount: number): { whole: string; decimals: string } {
+  const fixed = amount.toFixed(2);
+  const dotIndex = fixed.indexOf(".");
+  return {
+    whole: fixed.slice(0, dotIndex),
+    decimals: fixed.slice(dotIndex + 1),
+  };
+}
+
 export function formatExpiry(value: string): string {
   const digits = value.replaceAll(/\D/g, "").slice(0, EXPIRY_MAX_DIGITS);
 

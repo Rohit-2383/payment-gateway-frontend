@@ -22,7 +22,7 @@ export function TransactionDetailsModalRoot({
     <Dialog open={selectedTransaction !== null} onOpenChange={handleOpenChange}>
       <DialogContent
         showCloseButton={false}
-        className="max-h-[90vh] overflow-y-auto sm:max-w-md"
+        className="max-h-[90vh] gap-0 overflow-hidden p-0 sm:max-w-md sm:rounded-2xl"
       >
         {selectedTransaction !== null && (
           <TransactionModalContext.Provider value={{ transaction: selectedTransaction }}>

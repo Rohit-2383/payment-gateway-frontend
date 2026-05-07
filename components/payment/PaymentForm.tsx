@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import type { UseFormReturn } from "react-hook-form";
+import { Lock } from "lucide-react";
 
 import { AmountInput } from "@/components/payment/inputs/AmountInput";
 import { CVVInput } from "@/components/payment/inputs/CVVInput";
@@ -11,7 +12,7 @@ import { CardholderField } from "@/components/payment/CardholderField";
 import { CurrencyField } from "@/components/payment/CurrencyField";
 import { Separator } from "@/components/ui/separator";
 import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import type { PaymentPayload } from "@/types/payment";
+import type { CardType, PaymentPayload } from "@/types/payment";
 import {
   type PaymentFormInputValues,
   type PaymentFormValues,
@@ -22,6 +23,7 @@ export type PaymentFormProps = {
   description?: string;
   form: UseFormReturn<PaymentFormInputValues, unknown, PaymentFormValues>;
   maxCVVLength: number;
+  cardType: CardType;
   onSubmitPayment: (payload: PaymentPayload) => Promise<void> | void;
   children?: React.ReactNode;
 };
@@ -31,6 +33,7 @@ export function PaymentForm({
   description,
   form,
   maxCVVLength,
+  cardType,
   onSubmitPayment,
   children,
 }: PaymentFormProps) {
@@ -54,7 +57,10 @@ export function PaymentForm({
   return (
     <>
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle className="flex items-center gap-2">
+          <Lock className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+          {title}
+        </CardTitle>
         {description ? <CardDescription>{description}</CardDescription> : null}
       </CardHeader>
       <CardContent>
@@ -64,7 +70,7 @@ export function PaymentForm({
         >
           <CardholderField control={form.control} />
 
-          <CardInput control={form.control} name="cardNumber" />
+          <CardInput control={form.control} name="cardNumber" cardType={cardType} />
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <ExpiryInput control={form.control} name="expiry" />
@@ -89,4 +95,3 @@ export function PaymentForm({
     </>
   );
 }
-

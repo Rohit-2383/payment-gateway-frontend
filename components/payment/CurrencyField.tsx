@@ -3,6 +3,8 @@
 import * as React from "react";
 import { Controller, type Control } from "react-hook-form";
 
+import { AlertCircle } from "lucide-react";
+
 import {
   Select,
   SelectContent,
@@ -63,7 +65,8 @@ export function CurrencyField({ control, id, className }: CurrencyFieldProps) {
               </Select>
             </div>
             {errorMessage ? (
-              <p id={errorId} className="mt-1.5 text-xs text-destructive">
+              <p id={errorId} className="mt-1.5 flex items-center gap-1 text-xs text-destructive">
+                <AlertCircle className="h-3 w-3 shrink-0" aria-hidden="true" />
                 {errorMessage}
               </p>
             ) : null}

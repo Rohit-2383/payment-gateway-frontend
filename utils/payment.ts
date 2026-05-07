@@ -1,12 +1,10 @@
 import {
   PAYMENT_TIMEOUT_MS,
   PAYMENT_STATUS,
+  NETWORK_ERROR_MESSAGE,
+  TIMEOUT_ERROR_MESSAGE,
 } from "@/constants/payment";
-
-import {
-  PaymentPayload,
-  PaymentResponse,
-} from "@/types/payment";
+import { PaymentPayload, PaymentResponse } from "@/types/payment";
 
 export const processPayment = async (
   payload: PaymentPayload
@@ -20,35 +18,34 @@ export const processPayment = async (
   try {
     const response = await fetch("/api/pay", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
       signal: controller.signal,
     });
 
-    const data: PaymentResponse =
-      await response.json();
-
+    const data: PaymentResponse = await response.json();
     return data;
   } catch (error) {
-    if (
-      error instanceof Error &&
-      error.name === "AbortError"
-    ) {
+    if (error instanceof Error && error.name === "AbortError") {
       return {
         success: false,
         status: PAYMENT_STATUS.TIMEOUT,
-        reason:
-          "Payment request timed out. Please try again.",
+        reason: TIMEOUT_ERROR_MESSAGE,
+      };
+    }
+
+    if (error instanceof TypeError) {
+      return {
+        success: false,
+        status: PAYMENT_STATUS.FAILED,
+        reason: NETWORK_ERROR_MESSAGE,
       };
     }
 
     return {
       success: false,
       status: PAYMENT_STATUS.FAILED,
-      reason:
-        "Something went wrong while processing payment.",
+      reason: "Something went wrong while processing payment.",
     };
   } finally {
     clearTimeout(timeoutId);

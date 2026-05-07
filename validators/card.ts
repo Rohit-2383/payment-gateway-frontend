@@ -12,8 +12,17 @@ const ERROR_MESSAGES = {
 
 export function getCardTypeFromCardNumber(digits: string): CardType {
   if (digits.startsWith("4")) return CARD_TYPES.VISA;
-  if (digits.startsWith("5")) return CARD_TYPES.MASTERCARD;
   if (digits.startsWith("34") || digits.startsWith("37")) return CARD_TYPES.AMEX;
+  // Mastercard 51-55: need at least 2 digits to distinguish from 50/56-59
+  if (digits.length >= 2) {
+    const twoDigit = parseInt(digits.slice(0, 2), 10);
+    if (twoDigit >= 51 && twoDigit <= 55) return CARD_TYPES.MASTERCARD;
+  }
+  // Mastercard 2-series 2221-2720: need at least 4 digits
+  if (digits.length >= 4) {
+    const fourDigit = parseInt(digits.slice(0, 4), 10);
+    if (fourDigit >= 2221 && fourDigit <= 2720) return CARD_TYPES.MASTERCARD;
+  }
   return CARD_TYPES.UNKNOWN;
 }
 

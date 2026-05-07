@@ -34,12 +34,17 @@ export function CardPreviewRoot({
     <CardPreviewContext.Provider value={ctxValue}>
       <Card
         className={cn(
-          "relative overflow-hidden border-0 bg-linear-to-br from-zinc-950 via-zinc-900 to-zinc-800 text-zinc-50 shadow-sm ring-1 ring-zinc-950/10 dark:ring-zinc-50/10",
+          "relative aspect-[1.586/1] overflow-hidden border-0 bg-linear-to-br from-[#1a1f3a] via-[#2d1b4e] to-[#1a1a2e] text-zinc-50 shadow-xl ring-1 ring-black/20 transition-transform duration-300 hover:scale-[1.01]",
           className
         )}
       >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.18),transparent_45%),radial-gradient(circle_at_80%_30%,rgba(255,255,255,0.10),transparent_40%)]" />
-        <CardContent className="relative flex flex-col gap-5 p-5 sm:p-6">
+        {/* Subtle grid lines */}
+        <div className="card-grid-overlay pointer-events-none absolute inset-0 opacity-60" />
+        {/* Top holographic glow */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-10%,rgba(147,129,255,0.18),transparent)]" />
+        {/* Corner light reflection */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(255,255,255,0.10),transparent_38%)]" />
+        <CardContent className="relative flex h-full flex-col justify-between p-5 sm:p-6">
           {children}
         </CardContent>
       </Card>

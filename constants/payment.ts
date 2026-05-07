@@ -22,11 +22,11 @@ export const PAYMENT_TIMEOUT_MS = 6000;
 export const PROCESSING_DELAY_MS = 2000;
 
 export const TRANSACTION_STATUS_CLASSES: Record<PaymentStatus, string> = {
-  [PAYMENT_STATUS.SUCCESS]: "bg-green-100 text-green-800",
-  [PAYMENT_STATUS.FAILED]: "bg-red-100 text-red-800",
-  [PAYMENT_STATUS.TIMEOUT]: "bg-amber-100 text-amber-800",
-  [PAYMENT_STATUS.PROCESSING]: "bg-blue-100 text-blue-800",
-  [PAYMENT_STATUS.IDLE]: "bg-gray-100 text-gray-800",
+  [PAYMENT_STATUS.SUCCESS]: "bg-success-subtle text-success-fg",
+  [PAYMENT_STATUS.FAILED]: "bg-danger-subtle text-danger-fg",
+  [PAYMENT_STATUS.TIMEOUT]: "bg-warning-subtle text-warning-fg",
+  [PAYMENT_STATUS.PROCESSING]: "bg-brand-subtle text-brand",
+  [PAYMENT_STATUS.IDLE]: "bg-muted text-muted-foreground",
 };
 
 export const REASON_VISIBLE_STATUSES: ReadonlySet<PaymentStatus> = new Set([
@@ -47,3 +47,19 @@ export const STATUS_LABELS: Record<PaymentStatus, string> = {
   [PAYMENT_STATUS.FAILED]: "Failed",
   [PAYMENT_STATUS.TIMEOUT]: "Timeout",
 };
+
+export const MAX_ATTEMPTS_MESSAGE =
+  "Maximum retry attempts reached. Please contact support or try a different card.";
+
+export const NETWORK_ERROR_MESSAGE =
+  "Unable to reach payment server. Check your connection.";
+
+export const TIMEOUT_ERROR_MESSAGE = "Request took too long. Please try again.";
+
+export const UI_TEXT = {
+  title: "Payment Gateway",
+  subtitle: "Production-quality payment form",
+  leftTitle: "Payment details",
+  leftDescription: "Real-time validation, formatting, and card detection.",
+} as const;
+

@@ -13,6 +13,8 @@ export const CardPreviewNumber = React.memo(function CardPreviewNumber() {
     trimmed.length > 0 ? formatCardNumber(trimmed) : CARD_PREVIEW_PLACEHOLDERS.cardNumber;
 
   return (
-    <p className="font-mono text-lg leading-none tracking-wider sm:text-xl">{displayNumber}</p>
+    <p className="font-mono text-xl leading-none tracking-[0.22em] sm:text-2xl">
+      {displayNumber}
+    </p>
   );
 });

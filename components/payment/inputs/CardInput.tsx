@@ -3,10 +3,14 @@
 import * as React from "react";
 import type { Control, FieldPath, FieldValues } from "react-hook-form";
 import { Controller } from "react-hook-form";
+import { AlertCircle } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { CARD_TYPES } from "@/constants/cards";
+import { CardBrandIcon } from "@/components/payment/card-brand-icons";
 import { formatCardNumber } from "@/utils/formatters";
+import type { CardType } from "@/types/payment";
 
 const DEFAULT_LABEL = "Card Number";
 const DEFAULT_PLACEHOLDER = "1234 5678 9012 3456";
@@ -22,6 +26,7 @@ export type CardInputProps<
 > = {
   control: Control<TFieldValues, unknown, TTransformedValues>;
   name: FieldPath<TFieldValues>;
+  cardType?: CardType;
   label?: string;
   description?: string;
   placeholder?: string;
@@ -36,6 +41,7 @@ export function CardInput<
 >({
   control,
   name,
+  cardType,
   label = DEFAULT_LABEL,
   description,
   placeholder = DEFAULT_PLACEHOLDER,
@@ -47,6 +53,8 @@ export function CardInput<
   const inputId = id ?? reactId;
   const descriptionId = `${inputId}-description`;
   const errorId = `${inputId}-error`;
+
+  const showBadge = cardType !== undefined && cardType !== CARD_TYPES.UNKNOWN;
 
   return (
     <Controller
@@ -65,8 +73,14 @@ export function CardInput<
 
         return (
           <div className={cn("flex flex-col gap-1.5", className)}>
-            <label className="text-sm font-medium" htmlFor={inputId}>
+            <label
+              className="flex items-center gap-2 text-sm font-medium"
+              htmlFor={inputId}
+            >
               {label}
+              {showBadge && cardType && (
+                <CardBrandIcon cardType={cardType} variant="badge" />
+              )}
             </label>
 
             {description ? (
@@ -75,26 +89,42 @@ export function CardInput<
               </p>
             ) : null}
 
-            <Input
-              {...inputProps}
-              id={inputId}
-              ref={field.ref}
-              name={field.name}
-              value={value}
-              inputMode="numeric"
-              autoComplete="cc-number"
-              placeholder={placeholder}
-              aria-invalid={Boolean(errorMessage)}
-              aria-describedby={describedBy.length > 0 ? describedBy : undefined}
-              onBlur={field.onBlur}
-              onChange={(event) => {
-                const formatted = formatCardNumber(event.target.value);
-                field.onChange(formatted);
-              }}
-            />
+            <div className="relative">
+              <Input
+                {...inputProps}
+                id={inputId}
+                ref={field.ref}
+                name={field.name}
+                value={value}
+                inputMode="numeric"
+                autoComplete="cc-number"
+                placeholder={placeholder}
+                aria-invalid={Boolean(errorMessage)}
+                aria-describedby={describedBy.length > 0 ? describedBy : undefined}
+                className={cn(
+                  "font-mono tabular-nums",
+                  showBadge && "pr-16",
+                  inputProps?.className
+                )}
+                onBlur={field.onBlur}
+                onChange={(event) => {
+                  const formatted = formatCardNumber(event.target.value);
+                  field.onChange(formatted);
+                }}
+              />
+              {showBadge && cardType && (
+                <span
+                  className="pointer-events-none absolute inset-y-0 right-2.5 flex items-center"
+                  aria-hidden="true"
+                >
+                  <CardBrandIcon cardType={cardType} variant="badge" />
+                </span>
+              )}
+            </div>
 
             {errorMessage ? (
-              <p id={errorId} className="text-xs text-destructive">
+              <p id={errorId} className="flex items-center gap-1 text-xs text-destructive">
+                <AlertCircle className="h-3 w-3 shrink-0" aria-hidden="true" />
                 {errorMessage}
               </p>
             ) : null}
@@ -104,4 +134,3 @@ export function CardInput<
     />
   );
 }
-

@@ -3,6 +3,7 @@
 import * as React from "react";
 import type { Control, FieldPath, FieldValues } from "react-hook-form";
 import { Controller } from "react-hook-form";
+import { AlertCircle } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -94,6 +95,7 @@ export function CVVInput<
               placeholder={placeholder}
               aria-invalid={Boolean(errorMessage)}
               aria-describedby={describedBy.length > 0 ? describedBy : undefined}
+              className={cn("font-mono tabular-nums", inputProps?.className)}
               onBlur={field.onBlur}
               onChange={(event) => {
                 const sanitized = sanitizeCvv(event.target.value, maxLength);
@@ -102,7 +104,8 @@ export function CVVInput<
             />
 
             {errorMessage ? (
-              <p id={errorId} className="text-xs text-destructive">
+              <p id={errorId} className="flex items-center gap-1 text-xs text-destructive">
+                <AlertCircle className="h-3 w-3 shrink-0" aria-hidden="true" />
                 {errorMessage}
               </p>
             ) : null}
@@ -112,4 +115,3 @@ export function CVVInput<
     />
   );
 }
-
