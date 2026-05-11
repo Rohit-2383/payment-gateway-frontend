@@ -220,4 +220,6 @@ Each section was committed independently for clear history:
 - refactor: convert CardPreview to compound component pattern
 - refactor: convert TransactionDetailsModal to compound component pattern
 - style: refined design system, typography, animations and result screens
+-fix: CardPreview responsive layout for screens below 400px
+
 - docs: add comprehensive README
