@@ -220,4 +220,6 @@ Each section was committed independently for clear history:
 - refactor: convert CardPreview to compound component pattern
 - refactor: convert TransactionDetailsModal to compound component pattern
 - style: refined design system, typography, animations and result screens
+- fix: improve CardPreview responsive layout on small screens
+ fix: add cursor pointer to action buttons-
 - docs: add comprehensive README

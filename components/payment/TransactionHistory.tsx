@@ -63,7 +63,7 @@ const TransactionRow = memo(function TransactionRow({
 
   const viewButton = (
     <button
-      className="flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+      className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
       onClick={handleClick}
       aria-label={`View transaction details for ${truncatedId}`}
     >
